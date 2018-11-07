@@ -1,0 +1,34 @@
+# Travis-ci  specification  for  SWI-Prolog    contributed  by  Jonathan
+# Goldfarb. Please note that SWI-Prolog  commits   are  frequent and the
+# HEAD of master does not always build.
+
+language: cpp
+
+dist: trusty
+
+os:
+  - linux
+  - osx
+
+addons:
+  apt:
+    packages:
+      - libjpeg-dev
+      - libtiff-dev
+      - libtool
+      - autotools-dev
+      - autoconf
+  homebrew:
+    packages:
+      - jpeg
+      - libtiff
+      - libtool
+      - autoconf
+      - automake
+      - pkg-config
+
+script:
+  - ./autogen.sh
+  - ./configure --prefix=`pwd`/usr --disable-desktopfiles 
+  - make
+  - make install
